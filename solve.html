@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>開始解題 | 國中生解題系統</title>
+    <link href="https://i.meee.com.tw/MIAHp9H.png" rel="icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #e50914;
+            --dark-bg: #000;
+            --editor-bg: #1e1e1e; /* VS Code 風格深灰色 */
+            --card-bg: #141414;
+            --text-main: #fff;
+            --text-sub: #999;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Consolas', 'Monaco', 'Microsoft JhengHei', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* 繼承你的 Showcase 風格但縮小一點 */
+        .showcase-mini {
+            height: 30vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.meee.com.tw/MIAHp9H.png') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* 導覽列保持一致 */
+        .tabs {
+            background: #141414;
+            border-bottom: 3px solid #3d3d3d;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .tabs .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .tab-item {
+            padding: 1.2rem 0;
+            text-align: center;
+            color: var(--text-sub);
+        }
+
+        .tab-item a { color: inherit; text-decoration: none; }
+        .tab-border { border-bottom: var(--primary-color) 4px solid; color: #fff; }
+
+        /* 解題主區域 */
+        .solve-container {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .problem-description {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        /* 模擬編輯器容器 */
+        .editor-wrapper {
+            background: var(--editor-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .editor-header {
+            background: #2d2d2d;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #111;
+        }
+
+        .dots { display: flex; gap: 8px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        label {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* 程式碼輸入框 */
+        textarea {
+            width: 100%;
+            height: 350px;
+            background: transparent;
+            color: #d4d4d4;
+            border: none;
+            padding: 20px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 1.1rem;
+            resize: vertical;
+            outline: none;
+            display: block;
+        }
+
+        /* 按鈕優化 */
+        .submit-area {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn-submit {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 35px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #f40612;
+            transform: scale(1.05);
+        }
+
+        /* 結果輸出區 */
+        .result-box {
+            margin-top: 2rem;
+            background: #111;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px dashed #444;
+        }
+
+        .result-title {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        output-area {
+            display: block;
+            color: #00ff00;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        footer { text-align: center; padding: 3rem; color: #444; }
+    </style>
+</head>
+<body>
+
+    <header class="showcase-mini">
+        <h1>程式碼實驗室</h1>
+        <p>請在此輸入您的解法並送出評測</p>
+    </header>
+
+    <nav class="tabs">
+        <div class="container">
+            <div class="tab-item"><a href="/"><i class="fas fa-home"></i> 回首頁</a></div>
+            <div class="tab-item tab-border"><a href="/problems"><i class="fas fa-code"></i> 解題中</a></div>
+            <div class="tab-item"><a href="/about"><i class="fas fa-question-circle"></i> 幫助</a></div>
+        </div>
+    </nav>
+
+    <main class="solve-container">
+        <dis/>
+
+        <form action="" method="POST">
+            <div class="editor-wrapper">
+                <div class="editor-header">
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span style="font-size: 0.8rem; color: #666;">main.py / main.cpp</span>
+                </div>
+                <textarea name="code" placeholder="Type your code here..." required></textarea>
+            </div>
+
+            <div class="submit-area">
+                <span style="color: #666; font-size: 0.9rem;">提示：請檢查語法錯誤後再送出</span>
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-paper-plane"></i> 送出評測
+                </button>
+            </div>
+        </form>
+
+        <div class="result-box">
+            <div class="result-title"><i class="fas fa-terminal"></i> 評測結果</div>
+            <out/>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 國中生解題系統 | Code with Passion
+    </footer>
+
+</body>
+</html>
